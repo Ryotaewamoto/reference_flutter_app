@@ -1,0 +1,34 @@
+name: 'Static Analysis and Testing'
+
+on:
+  pull_request:
+
+jobs:
+  analyzer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions
+      - run: flutter analyze
+
+  formatter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions
+      - run: flutter format --output=none --set-exit-if-changed .
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions
+      - run: flutter pub get
+      - run: flutter test --no-test-assets --coverage --coverage-path=~/coverage/lcov.info
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ~/coverage/lcov.info
