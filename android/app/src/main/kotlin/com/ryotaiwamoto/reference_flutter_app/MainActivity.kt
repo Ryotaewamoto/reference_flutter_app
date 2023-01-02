@@ -1,4 +1,4 @@
-package com.example.reference_flutter_app
+package com.ryotaiwamoto.reference_flutter_app
 
 import io.flutter.embedding.android.FlutterActivity
 
