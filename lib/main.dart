@@ -1,7 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'utils/settings.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // 画面の向きを固定する。
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // Firebase を初期化する。
+  await Firebase.initializeApp(options: flavor.firebaseOptions);
+  // FirebaseUser を取得する
+  final firebaseUser = await FirebaseAuth.instance.userChanges().first;
+  debugPrint('uid = ${firebaseUser?.uid}');
+  if (firebaseUser == null) {
+    // 未サインインなら匿名ユーザーでサインインする
+    final credential = await FirebaseAuth.instance.signInAnonymously();
+    final uid = credential.user!.uid;
+    debugPrint('Signed in: uid = $uid');
+  }
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -45,3 +45,5 @@ app.*.map.json
 
 # Flutter Vesrion Manager related
 .fvm/flutter_sdk
+
+/coverage
