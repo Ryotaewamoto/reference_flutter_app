@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '606999752029',
     projectId: 'reference-flutter-app-prod',
     storageBucket: 'reference-flutter-app-prod.appspot.com',
-    iosClientId: '606999752029-fr0onnenkng2b0nqqgfl1radota07413.apps.googleusercontent.com',
+    iosClientId:
+        '606999752029-fr0onnenkng2b0nqqgfl1radota07413.apps.googleusercontent.com',
     iosBundleId: 'com.ryotaiwamoto.referenceFlutterApp',
   );
 }
