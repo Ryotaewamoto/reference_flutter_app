@@ -26,9 +26,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions
-      - run: flutter pub get
-      - run: flutter test --no-test-assets --coverage --coverage-path=~/coverage/lcov.info
-      - uses: codecov/codecov-action@v1
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
-          file: ~/coverage/lcov.info
+      - run: flutter test --coverage
